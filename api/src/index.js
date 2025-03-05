@@ -20,7 +20,7 @@ apiRouter.get("/future-meals", async (req, res) => {
 		const meals = upcomingMeals[0];
 		meals.length ?
 			res.json(meals)
-		:	res.status(404).json("There are no any events in the future.");
+		:	res.status(204).json("There are no any events in the future.");
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
@@ -33,7 +33,7 @@ apiRouter.get("/past-meals", async (req, res) => {
 		const meals = pastMeals[0];
 		meals.length ?
 			res.json(meals)
-		:	res.status(404).json("There are no any past events.");
+		:	res.status(204).json("There are no any past events.");
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
@@ -45,7 +45,7 @@ apiRouter.get("/all-meals", async (req, res) => {
 		const allMeals = await knex.raw("SELECT * FROM meal ORDER BY id");
 
 		const meals = allMeals[0];
-		meals.length ? res.json(meals) : res.status(404).json("Meals not found.");
+		meals.length ? res.json(meals) : res.status(204).json("Meals not found.");
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
