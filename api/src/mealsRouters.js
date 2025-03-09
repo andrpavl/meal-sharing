@@ -1,6 +1,6 @@
 import knex from "./database_client.js";
 
-export const getFutureMeals = async (req, res) => {
+export const getFutureMeals = async (_, res) => {
 	try {
 		const upcomingMeals = await knex.raw(
 			"SELECT * FROM meal WHERE `when` > NOW()"
@@ -8,36 +8,37 @@ export const getFutureMeals = async (req, res) => {
 		const meals = upcomingMeals[0];
 		meals.length ?
 			res.json(meals)
-		:	res.status(204).json("There are no any events in the future.");
+		:	res.status(200).json("There are no any events in the future.");
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
 };
 
-export const getPastMeals = async (req, res) => {
+export const getPastMeals = async (_, res) => {
 	try {
 		const pastMeals = await knex.raw("SELECT * FROM meal WHERE `when` < NOW()");
 		const meals = pastMeals[0];
-		meals.length > 0 ?
+
+		meals.length ?
 			res.json(meals)
-		:	res.status(204).json("There are no any past events.");
+		:	res.status(200).json({ message: "There are no any past events." });
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
 };
 
-export const getAllMeals = async (req, res) => {
+export const getAllMeals = async (_, res) => {
 	try {
 		const allMeals = await knex.raw("SELECT * FROM meal ORDER BY id");
 
 		const meals = allMeals[0];
-		meals.length ? res.json(meals) : res.status(204).json("Meals not found.");
+		meals.length ? res.json(meals) : res.status(200).json("Meals not found.");
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
 };
 
-export const getFirstMeal = async (req, res) => {
+export const getFirstMeal = async (_, res) => {
 	try {
 		const firstMeal = await knex.raw("SELECT * FROM meal ORDER BY id LIMIT 1");
 
@@ -50,7 +51,7 @@ export const getFirstMeal = async (req, res) => {
 	}
 };
 
-export const getLastMeal = async (req, res) => {
+export const getLastMeal = async (_, res) => {
 	try {
 		const lastMeal = await knex.raw(
 			"SELECT * FROM meal ORDER BY id DESC LIMIT 1"
@@ -65,12 +66,12 @@ export const getLastMeal = async (req, res) => {
 	}
 };
 
-export const getMeals = async (req, res) => {
+export const getMeals = async (_, res) => {
 	try {
 		const allMeals = await knex.raw("SELECT * FROM meal ORDER BY id");
 
 		const meals = allMeals[0];
-		meals.length ? res.json(meals) : res.status(204).json("Meals not found.");
+		meals.length ? res.json(meals) : res.status(200).json("Meals not found.");
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
@@ -112,7 +113,6 @@ export const addNewMeal = async (req, res) => {
 
 		res.status(201).json({ message: "Meal added successfully!" });
 	} catch (error) {
-		console.error("Error adding meal:", error);
 		res.status(500).json({ error: "Internal server error." });
 	}
 };
