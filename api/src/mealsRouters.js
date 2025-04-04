@@ -1,12 +1,11 @@
 import knex from "./database_client.js";
 
+import knex from "./database_client.js";
+
 export const getFutureMeals = async (_, res) => {
 	try {
 		const upcomingMeals = await knex("meal").where("when", ">", knex.fn.now());
-		const meals = upcomingMeals[0];
-		meals.length ?
-			res.json(meals)
-		:	res.status(200).json("There are no any events in the future.");
+		res.json(upcomingMeals.length ? upcomingMeals : []);
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
@@ -15,59 +14,62 @@ export const getFutureMeals = async (_, res) => {
 export const getPastMeals = async (_, res) => {
 	try {
 		const pastMeals = await knex("meal").where("when", "<", knex.fn.now());
-		const meals = pastMeals[0];
-
-		meals.length ?
-			res.json(meals)
-		:	res.status(200).json({ message: "There are no any past events." });
+		pastMeals.length ? res.json(pastMeals) : res.status(200).json({ message: "There are no past events." });
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
 };
 
-export const getAllMeals = async (_, res) => {
+export const getMeals = async (req, res) => {
 	try {
-		const allMeals = await knex("meal").orderBy("id");
+		let query = knex("meal")
+			.select("meal.*")
+			.leftJoin("reservation", "meal.id", "reservation.meal_id")
+			.groupBy("meal.id")
+			.count("reservation.id as total_reservations");
 
-		allMeals.length ?
-			res.json(allMeals)
-		:	res.status(200).json("Meals not found.");
-	} catch (error) {
-		res.status(500).json({ error: "Internal server error." });
-	}
-};
+		if (req.query.maxPrice) {
+			const maxPrice = parseFloat(req.query.maxPrice);
+			if (!isNaN(maxPrice)) query = query.where("price", "<", maxPrice);
+			else return res.status(400).json({ error: "Invalid maxPrice value" });
+		}
 
-export const getFirstMeal = async (_, res) => {
-	try {
-		const firstMeal = await knex("meal").orderBy("id").first();
+		if (req.query.title) query = query.where("title", "LIKE", `%${req.query.title.trim()}%`);
 
-		firstMeal ?
-			res.json(firstMeal)
-		:	res.status(404).json("Meals not found.");
-	} catch (error) {
-		res.status(500).json({ error: "Internal server error." });
-	}
-};
+		if (req.query.availableReservations) {
+			const available = req.query.availableReservations === "true";
+			query = query.havingRaw(
+				available ? "total_reservations < meal.max_reservations" : "total_reservations >= meal.max_reservations"
+			);
+		}
 
-export const getLastMeal = async (_, res) => {
-	try {
-		const lastMeal = await knex("meal").orderBy("id", "desc").first();
+		if (req.query.dateAfter) {
+			const dateAfter = new Date(req.query.dateAfter);
+			if (isNaN(dateAfter)) return res.status(400).json({ error: "Invalid dateAfter value" });
+			query = query.where("meal.when", ">", dateAfter);
+		}
 
-		lastMeal ?
-			res.json(lastMeal)
-		:	res.status(404).json("Meals not found.");
-	} catch (error) {
-		res.status(500).json({ error: "Internal server error." });
-	}
-};
+		if (req.query.dateBefore) {
+			const dateBefore = new Date(req.query.dateBefore);
+			if (isNaN(dateBefore)) return res.status(400).json({ error: "Invalid dateBefore value" });
+			query = query.where("meal.when", "<", dateBefore);
+		}
 
-export const getMeals = async (_, res) => {
-	try {
-		const allMeals = await knex("meal").orderBy("id");
+		if (req.query.limit) {
+			const limit = parseInt(req.query.limit, 10);
+			if (!isNaN(limit) && limit > 0) query = query.limit(limit);
+			else return res.status(400).json({ error: "Invalid limit value" });
+		}
 
-		allMeals.length ?
-			res.json(allMeals)
-		:	res.status(200).json("Meals not found.");
+		if (req.query.sortKey) {
+			const validSortKeys = ["when", "max_reservations", "price"];
+			if (validSortKeys.includes(req.query.sortKey)) {
+				query = query.orderBy(req.query.sortKey, req.query.sortDir === "desc" ? "desc" : "asc");
+			} else return res.status(400).json({ error: "Invalid sortKey value" });
+		}
+
+		const meals = await query;
+		meals.length ? res.json(meals) : res.status(404).json("Meals not found.");
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
@@ -97,7 +99,7 @@ export const addNewMeal = async (req, res) => {
 			return res.status(400).json({ error: "All fields are required." });
 		}
 
-		const result = await knex("meal").insert({
+		await knex("meal").insert({
 			title,
 			description,
 			location,
