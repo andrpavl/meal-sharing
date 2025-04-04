@@ -5,10 +5,8 @@ export const getFutureMeals = async (_, res) => {
 		const upcomingMeals = await knex.raw(
 			"SELECT * FROM meal WHERE `when` > NOW()"
 		);
-		const meals = upcomingMeals[0];
-		meals.length ?
-			res.json(meals)
-		:	res.status(200).json("There are no any events in the future.");
+
+		res.json(upcomingMeals[0] || []);
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
