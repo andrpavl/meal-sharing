@@ -17,7 +17,7 @@ import {
 } from "./mealsRouters.js";
 import {
 	addNewReservation,
-	deleteReservationById,
+	deleteReservation,
 	getReservationById,
 	getReservations,
 	updateReservationById,
@@ -74,11 +74,11 @@ apiRouter.post("/reservations", addNewReservation);
 
 apiRouter.get("/reservations/:id", getReservationById);
 
-// Update resrvation by id 
-apiRouter.put('/api/reservations/:id', updateReservationById);
+// Update resrvation by id
+apiRouter.put("/api/reservations/:id", updateReservationById);
 
 // Delete resrvation by id
-apiRouter.delete('/api/reservations/:id', deleteReservationById);
+apiRouter.delete("/api/reservations/:id", deleteReservation);
 
 app.use("/api", apiRouter);
 
