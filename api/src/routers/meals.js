@@ -1,15 +1,15 @@
 import express from "express";
 import {
-    addNewMeal,
-    deleteMealById,
-    getAllMeals,
-    getFirstMeal,
-    getFutureMeals,
-    getLastMeal,
-    getMealById,
-    getMeals,
-    getPastMeals,
-    updateMealById,
+	addNewMeal,
+	deleteMealById,
+	getAllMeals,
+	getFirstMeal,
+	getFutureMeals,
+	getLastMeal,
+	getMealById,
+	getMeals,
+	getPastMeals,
+	updateMealById,
 } from "../mealsRouters.js";
 
 const mealsRouter = express.Router();
