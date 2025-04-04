@@ -116,7 +116,7 @@ export const updateReservationById = async (req, res) => {
 	}
 };
 
-export const deleteReservationById = async (req, res) => {
+export const deleteReservation = async (req, res) => {
 	const reservationId = Number(req.params.id);
 
 	try {

@@ -1,12 +1,11 @@
 import knex from "./database_client.js";
 
+import knex from "./database_client.js";
+
 export const getFutureMeals = async (_, res) => {
 	try {
-		const upcomingMeals = await knex.raw(
-			"SELECT * FROM meal WHERE `when` > NOW()"
-		);
-
-		res.json(upcomingMeals[0] || []);
+		const upcomingMeals = await knex("meal").where("when", ">", knex.fn.now());
+		res.json(upcomingMeals.length ? upcomingMeals : []);
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
@@ -14,51 +13,8 @@ export const getFutureMeals = async (_, res) => {
 
 export const getPastMeals = async (_, res) => {
 	try {
-		const pastMeals = await knex.raw("SELECT * FROM meal WHERE `when` < NOW()");
-		const meals = pastMeals[0];
-
-		meals.length ?
-			res.json(meals)
-		:	res.status(200).json({ message: "There are no any past events." });
-	} catch (error) {
-		res.status(500).json({ error: "Internal server error." });
-	}
-};
-
-export const getAllMeals = async (_, res) => {
-	try {
-		const allMeals = await knex.raw("SELECT * FROM meal ORDER BY id");
-
-		const meals = allMeals[0];
-		meals.length ? res.json(meals) : res.status(200).json("Meals not found.");
-	} catch (error) {
-		res.status(500).json({ error: "Internal server error." });
-	}
-};
-
-export const getFirstMeal = async (_, res) => {
-	try {
-		const firstMeal = await knex.raw("SELECT * FROM meal ORDER BY id LIMIT 1");
-
-		const meals = firstMeal[0];
-		meals.length ?
-			res.json(meals[0])
-		:	res.status(404).json("Meals not found.");
-	} catch (error) {
-		res.status(500).json({ error: "Internal server error." });
-	}
-};
-
-export const getLastMeal = async (_, res) => {
-	try {
-		const lastMeal = await knex.raw(
-			"SELECT * FROM meal ORDER BY id DESC LIMIT 1"
-		);
-
-		const meals = lastMeal[0];
-		meals.length ?
-			res.json(meals[0])
-		:	res.status(404).json("Meals not found.");
+		const pastMeals = await knex("meal").where("when", "<", knex.fn.now());
+		pastMeals.length ? res.json(pastMeals) : res.status(200).json({ message: "There are no past events." });
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}
@@ -74,62 +30,42 @@ export const getMeals = async (req, res) => {
 
 		if (req.query.maxPrice) {
 			const maxPrice = parseFloat(req.query.maxPrice);
-			if (!isNaN(maxPrice)) {
-				query = query.where("price", "<", maxPrice);
-			} else {
-				return res.status(400).json({ error: "Invalid maxPrice value" });
-			}
+			if (!isNaN(maxPrice)) query = query.where("price", "<", maxPrice);
+			else return res.status(400).json({ error: "Invalid maxPrice value" });
 		}
 
-		if (req.query.title) {
-			const title = req.query.title.trim();
-			query = query.where("title", "LIKE", `%${title}%`);
-		}
+		if (req.query.title) query = query.where("title", "LIKE", `%${req.query.title.trim()}%`);
 
 		if (req.query.availableReservations) {
 			const available = req.query.availableReservations === "true";
 			query = query.havingRaw(
-				available ?
-					"total_reservations < meal.max_reservations"
-				:	"total_reservations >= meal.max_reservations"
+				available ? "total_reservations < meal.max_reservations" : "total_reservations >= meal.max_reservations"
 			);
 		}
 
 		if (req.query.dateAfter) {
-			const dateAfter = req.query.dateAfter.trim();
-			if (isNaN(new Date(dateAfter))) {
-				return res.status(400).json({ error: "Invalid dateAfter value" });
-			}
+			const dateAfter = new Date(req.query.dateAfter);
+			if (isNaN(dateAfter)) return res.status(400).json({ error: "Invalid dateAfter value" });
 			query = query.where("meal.when", ">", dateAfter);
 		}
 
 		if (req.query.dateBefore) {
-			const dateBefore = req.query.dateBefore.trim();
-			if (isNaN(new Date(dateBefore))) {
-				return res.status(400).json({ error: "Invalid dateBefore value" });
-			}
+			const dateBefore = new Date(req.query.dateBefore);
+			if (isNaN(dateBefore)) return res.status(400).json({ error: "Invalid dateBefore value" });
 			query = query.where("meal.when", "<", dateBefore);
 		}
 
 		if (req.query.limit) {
-			const limit = req.query.limit;
-			if (!isNaN(limit) && limit > 0) {
-				query = query.limit(limit);
-			} else {
-				return res.status(400).json({ error: "Invalid limit value" });
-			}
+			const limit = parseInt(req.query.limit, 10);
+			if (!isNaN(limit) && limit > 0) query = query.limit(limit);
+			else return res.status(400).json({ error: "Invalid limit value" });
 		}
 
 		if (req.query.sortKey) {
-			const sortKey = req.query.sortKey.trim();
 			const validSortKeys = ["when", "max_reservations", "price"];
-
-			if (validSortKeys.includes(sortKey)) {
-				const sortDir = req.query.sortDir === "desc" ? "desc" : "asc";
-				query = query.orderBy(sortKey, sortDir);
-			} else {
-				return res.status(400).json({ error: "Invalid sortKey value" });
-			}
+			if (validSortKeys.includes(req.query.sortKey)) {
+				query = query.orderBy(req.query.sortKey, req.query.sortDir === "desc" ? "desc" : "asc");
+			} else return res.status(400).json({ error: "Invalid sortKey value" });
 		}
 
 		const meals = await query;
