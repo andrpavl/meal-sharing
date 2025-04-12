@@ -2,7 +2,9 @@
 
 import { fetchAllMeals } from "@/utils/fetchFuncs";
 import { useState, useEffect } from "react";
-
+import Meal from "../Meal/Meal";
+import Loader from "../Loader";
+import { StyledMealList } from "./StyledMealsList";
 
 const MealsList = () => {
 	const [meals, setMeals] = useState(null);
@@ -24,17 +26,20 @@ const MealsList = () => {
 	return (
 		<div>
 			{isLoading ? (
-				<h3>Loading...</h3>
+				<Loader />
 			) : (
-				<ol>
-					{meals.map(({ id, title, description, price }) => (
-						<li key={id}>
-							<h4>{title}</h4>
-							<p>{description}</p>
-							<p>{price}</p>
-						</li>
+				<StyledMealList>
+					{meals.map((meal) => (
+						<Meal
+							key={meal.id}
+							id={meal.id}
+							title={meal.title}
+							description={meal.description}
+							price={meal.price}
+							image_URL={meal.image_URL}
+						/>
 					))}
-				</ol>
+				</StyledMealList>
 			)}
 		</div>
 	);
