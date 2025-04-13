@@ -7,3 +7,22 @@
 .message {
   margin: auto;
 }
+
+.hero {
+  height: 50vh;
+  background: url("https://images.unsplash.com/photo-1700513971603-eda40374ba0a?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 1px 1px 3px black;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 4rem;
+
+}
+
+.list-title {
+  text-align: center;
+}

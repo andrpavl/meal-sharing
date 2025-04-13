@@ -4,6 +4,7 @@
 	align-items: center;
 	background: linear-gradient(90deg, #c2c3c1 0%, #a9b08a 100%);
 	width: 100%;
+	margin-top: auto;
 }
 
 .socialMediaList {
@@ -15,7 +16,10 @@
 	margin-right: 32px;
 }
 
-
+.logoImg {
+	width: 160px;
+	height: 100%;
+}
 
 .socialMediaItem svg {
 	width: 30px;
