@@ -9,8 +9,10 @@ import styles from "./header.module.css";
 const Header = () => {
 	return (
 		<header className={styles.header}>
-			<Image src={logoImage} alt="logo" className={styles.logoImg}/>
-			<h2 className={styles.title}>Meal Sharing</h2>
+			<Image src={logoImage} alt="logo" className={styles.logoImg} />
+			<Link href="/" className={styles.title}>
+				Meal Sharing
+			</Link>
 			<nav className={styles.navbar}>
 				<Link href="/" className={styles.navItem}>
 					Home

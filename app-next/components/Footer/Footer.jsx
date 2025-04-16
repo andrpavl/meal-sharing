@@ -34,7 +34,9 @@ const Footer = () => {
 	return (
 		<footer className={styles.footer}>
 			<Image src={logoImage} alt="logo" className={styles.logoImg} />
-			<h2 className={styles.title}>Meal Sharing</h2>
+			<Link href="/" className={styles.title}>
+				Meal Sharing
+			</Link>
 			<ul className={styles.socialMediaList}>
 				{socialMediaItems.map((item) => (
 					<li key={item.mediaTitle} className={styles.socialMediaItem}>

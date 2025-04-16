@@ -19,10 +19,40 @@
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 4rem;
 
 }
 
 .list-title {
   text-align: center;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.buttons-container button {
+  height: 5rem;
+  padding: 12px;
+  width: 300px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(213, 207, 147);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-variant: small-caps;
+  font-size: 24px;
+  color: rgb(52, 49, 49);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.buttons-container button:hover {
+  transform: scale(1.05);
 }

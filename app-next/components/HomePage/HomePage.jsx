@@ -2,8 +2,10 @@
 
 import "./HomePage.css";
 import FeaturedMeals from "../FeaturedMeals/FeaturedMeals";
+import { useRouter } from "next/navigation";
 
 function HomePage() {
+	const router = useRouter();
 	return (
 		<>
 			<section className="hero">
@@ -14,8 +16,10 @@ function HomePage() {
 				of them!!!
 			</h2>
 			<FeaturedMeals />
-			<div>
-				<button>Browse MORE Meal Sharing events</button>
+			<div className="buttons-container">
+				<button onClick={() => router.push("/meals")}>
+					Browse MORE Meal Sharing events here
+				</button>
 				<button>Add a new event</button>
 				<button>Go to reservations</button>
 			</div>

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
 *,
 *::before,
 *::after {
@@ -21,4 +22,8 @@ body {
 main {
   padding: 20px 32px;
   flex: 1;
+}
+
+a {
+  text-decoration: none;
 }
