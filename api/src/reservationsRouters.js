@@ -1,6 +1,6 @@
 import knex from "./database_client.js";
 
-export const getReservations = async (req, res) => {
+export const getReservations = async (_, res) => {
 	try {
 		const allReservations = await knex.raw(
 			"SELECT * FROM reservation ORDER BY id"
