@@ -17,8 +17,8 @@ const Header = () => {
 				<Link href="/" className={styles.navItem}>
 					Home
 				</Link>
-				<Link href="/reservations" className={styles.navItem}>
-					Reservations
+				<Link href="/meals" className={styles.navItem}>
+					All Meals
 				</Link>
 				<Link href="/add-meal" className={styles.navItem}>
 					Add Meal

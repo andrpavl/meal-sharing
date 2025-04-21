@@ -1,0 +1,60 @@
+.textarea {
+    width: 100%;
+    resize: none;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+}
+
+.reviewForm {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    width: 30%;
+    align-items: center;
+    border: 2px solid lightgray;
+    padding: 8px;
+    border-radius: 8px;
+
+}
+
+.addBtn {
+    width: 100%;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.reviewTitle {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+}
+
+.reviewsList {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.listItem {
+    background-color: rgba(198, 190, 190, 0.8);
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.stars {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+}

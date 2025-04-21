@@ -2,8 +2,9 @@
 
 import { useForm } from "react-hook-form";
 import styles from "./BookForm.module.css";
+import Swal from "sweetalert2";
 
-const BookForm = ({ mealId, maxGuests, onSuccess }) => {
+const BookForm = ({ mealId, maxGuests }) => {
 	const {
 		register,
 		handleSubmit,
@@ -13,7 +14,7 @@ const BookForm = ({ mealId, maxGuests, onSuccess }) => {
 
 	const onSubmit = async (data) => {
 		try {
-			const res = await fetch("/api/reservations", {
+			const res = await fetch("http://localhost:3001/api/reservations/", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
@@ -21,24 +22,31 @@ const BookForm = ({ mealId, maxGuests, onSuccess }) => {
 					number_of_guests: Number(data.guests),
 					contact_name: data.name,
 					contact_email: data.email,
-					contact_phone: data.phone,
+					contact_phonenumber: data.phone,
+					created_date: new Date().toISOString().split("T")[0],
 				}),
 			});
 
 			if (!res.ok) throw new Error("Reservation failed");
 
-			alert("✅ Reservation successful!");
+			Swal.fire({
+				title: "Well done!",
+				text: "Resrvation successful!",
+				icon: "success",
+			});
 			reset();
-			if (onSuccess) onSuccess();
 		} catch (err) {
-			alert("❌ Something went wrong.");
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Something went wrong!",
+			});
 			console.error(err);
 		}
 	};
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-			{/* Name Field */}
 			<input
 				className={styles.inputField}
 				placeholder="Your name"
@@ -48,7 +56,6 @@ const BookForm = ({ mealId, maxGuests, onSuccess }) => {
 				<p className={styles.errorText}>{errors.name?.message}</p>
 			)}
 
-			{/* Email Field */}
 			<input
 				className={styles.inputField}
 				placeholder="Email"
@@ -59,7 +66,6 @@ const BookForm = ({ mealId, maxGuests, onSuccess }) => {
 				<p className={styles.errorText}>{errors.email?.message}</p>
 			)}
 
-			{/* Phone Field */}
 			<input
 				className={styles.inputField}
 				placeholder="Phone"
@@ -70,11 +76,11 @@ const BookForm = ({ mealId, maxGuests, onSuccess }) => {
 				<p className={styles.errorText}>{errors.phone?.message}</p>
 			)}
 
-			{/* Guests Field */}
 			<input
 				className={styles.inputField}
 				type="number"
 				placeholder="Guests"
+				max={10}
 				{...register("guests", {
 					required: "Number of guests is required",
 					min: 1,

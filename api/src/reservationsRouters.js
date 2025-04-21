@@ -37,16 +37,14 @@ export const addNewReservation = async (req, res) => {
 			return res.status(400).json({ error: "All fields are required." });
 		}
 
-		const result = await knex("reservation")
-			.insert({
-				number_of_guests,
-				meal_id,
-				created_date,
-				contact_phonenumber,
-				contact_name,
-				contact_email,
-			})
-			.returning("*");
+		const result = await knex("reservation").insert({
+			number_of_guests,
+			meal_id,
+			created_date,
+			contact_phonenumber,
+			contact_name,
+			contact_email,
+		});
 
 		res.status(201).json({ message: "Reservation added successfully!" });
 	} catch (error) {

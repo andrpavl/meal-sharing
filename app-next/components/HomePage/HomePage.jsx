@@ -20,8 +20,9 @@ function HomePage() {
 				<button onClick={() => router.push("/meals")}>
 					Browse MORE Meal Sharing events here
 				</button>
-				<button>Add a new event</button>
-				<button>Go to reservations</button>
+				<button onClick={() => router.push("/add-meal")}>
+					Add a new event
+				</button>
 			</div>
 		</>
 	);

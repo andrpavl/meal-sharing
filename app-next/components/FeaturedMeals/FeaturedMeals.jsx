@@ -23,7 +23,7 @@ const FeaturedMeals = () => {
 
 		getMeals();
 
-		const interval = setInterval(getMeals, 10000);
+		const interval = setInterval(getMeals, 7000);
 
 		return () => clearInterval(interval);
 	}, []);

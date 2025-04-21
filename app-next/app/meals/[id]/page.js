@@ -7,6 +7,8 @@ import BookForm from "@/components/BookForm/BookForm";
 import { getMealById, getReservations } from "@/utils/fetchFuncs";
 import styles from "./meal.module.css";
 import { useRouter } from "next/navigation";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import Reviews from "@/components/Reviews/Reviews";
 
 const MealPage = () => {
 	const { id } = useParams();
@@ -27,7 +29,7 @@ const MealPage = () => {
 				setMeal(mealData);
 				setReservations(filtered);
 			} catch (err) {
-				console.error("Failed to load meal:", err);
+				console.error(err);
 			} finally {
 				setIsLoading(false);
 			}
@@ -48,42 +50,46 @@ const MealPage = () => {
 		0
 	);
 	const availableSeats = meal.max_reservations - totalReserved;
-
-	const handleBackButton = () => {
-		router.back();
-	};
+	const mealDate = new Date(meal.when).toLocaleDateString("da-DK");
 	return (
-		<div className={styles.mealPageCont}>
-			<button className={styles.backBtn} onClick={handleBackButton}>
-				&larr; Go back
-			</button>
-			<div className={styles.mealCont}>
-				<h1>{meal.title}</h1>
-				<img className={styles.mealImg} src={meal.image_URL} alt={meal.title} />
-				<h3>
-					Description: <span>{meal.description}</span>
-				</h3>
-				<h3>
-					Location: <span>{meal.location}</span>
-				</h3>
-				<h3>
-					When: <span>{new Date(meal.when).toLocaleDateString("dk-DK")}</span>
-				</h3>
-				<h3>
-					Price: <span>€{meal.price}</span>
-				</h3>
-				<h3>
-					Available seats:{" "}
-					<span>{availableSeats > 0 ? availableSeats : "None 😢"}</span>
-				</h3>
-			</div>
-
-			{availableSeats > 0 && (
-				<div className={styles.reservCont}>
-					<h3>Make a Reservation</h3>
-					<BookForm mealId={meal.id} maxGuests={availableSeats} />
+		<div >
+			<div className={styles.mealPageCont}>
+				<button className={styles.backBtn} onClick={() => router.back()}>
+					<IoArrowBackCircleOutline /> Go back
+				</button>
+				<div className={styles.mealCont}>
+					<h1>{meal.title}</h1>
+					<img
+						className={styles.mealImg}
+						src={meal.image_URL}
+						alt={meal.title}
+					/>
+					<h3>
+						Description: <span>{meal.description}</span>
+					</h3>
+					<h3>
+						Location: <span>{meal.location}</span>
+					</h3>
+					<h3>
+						When: <span>{mealDate}</span>
+					</h3>
+					<h3>
+						Price: <span>€{meal.price}</span>
+					</h3>
+					<h3>
+						Available seats:{" "}
+						<span>{availableSeats > 0 ? availableSeats : "None 😢"}</span>
+					</h3>
 				</div>
-			)}
+
+				{availableSeats > 0 && (
+					<div className={styles.reservCont}>
+						<h3>Make a Reservation</h3>
+						<BookForm mealId={meal.id} maxGuests={availableSeats} />
+					</div>
+				)}
+			</div>
+			{<Reviews mealId={Number(id)} />}
 		</div>
 	);
 };

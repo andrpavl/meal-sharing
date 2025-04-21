@@ -27,3 +27,13 @@ export const getReservations = async () => {
 		console.log(error);
 	}
 };
+
+export const getReviewsByMealId  = async (id) => {
+	try {
+		const responce = await fetch(`http://localhost:3001/api/reviews/${id}`);
+		const data = await responce.json();
+		return data;
+	} catch (error) {
+		console.log(error);
+	}
+};
