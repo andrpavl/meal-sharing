@@ -1,71 +1,105 @@
 .mealPageCont {
-    position: relative;
-    display: flex;
-    gap: 2rem;
-    padding: 2rem;
-    justify-content: space-evenly;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: center;
+	align-items: flex-start;
+	max-width: 1200px;
+	margin: 0 auto;
+	animation: fadeIn 0.6s ease-in-out;
 }
 
 .mealCont {
-    flex: 1;
-    min-width: 300px;
-    max-width: 600px;
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	flex: 1 1 500px;
+	background: #f8f9fa;
+	padding: 2rem;
+	border-radius: 16px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+	transition: transform 0.3s ease;
+}
+
+.mealCont:hover {
+	transform: translateY(-4px);
 }
 
 .mealImg {
-    width: 100%;
-    max-height: 600px;
-    border-radius: 10px;
-    object-fit: cover;
-    margin-bottom: 1rem;
+	width: 100%;
+	max-height: 500px;
+	border-radius: 12px;
+	object-fit: cover;
+	margin-bottom: 1.5rem;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 .reservCont {
-    flex: 1;
-    min-width: 300px;
-    max-width: 400px;
-    background: #fff3cd;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    align-self: flex-start;
+	flex: 1 1 350px;
+	background: #fff3cd;
+	padding: 2rem;
+	border-radius: 16px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+	align-self: flex-start;
+	transition: transform 0.3s ease;
 }
 
-.mealCont h3 {
-    margin: 0.5rem 0;
+.reservCont:hover {
+	transform: translateY(-4px);
+}
+
+.mealCont h3,
+.reservCont h3 {
+	margin: 1rem 0 0.5rem;
+	color: #2c2c2c;
 }
 
 .mealCont span {
-    font-weight: normal;
+	font-weight: normal;
+	color: #555;
 }
 
 .backBtn {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    padding: 12px 18px;
-    border-radius: 6px;
-    border: none;
-    background-color: whitesmoke;
-    cursor: pointer;
-
-    font-size: 20px;
-    transition: all 0.3s ease;
-
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: space-between;
-    gap: 8px;
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	padding: 10px 16px;
+	border-radius: 8px;
+	border: none;
+	background-color: #eee;
+	cursor: pointer;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: #333;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .backBtn:hover {
-    background-color: darkgrey;
-    color: whitesmoke;
-    transform: scale(1.05);
+	background-color: #ccc;
+	color: white;
+	transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+	.mealPageCont {
+		flex-direction: column;
+		padding: 1rem;
+	}
+
+	.backBtn {
+		position: static;
+		margin-bottom: 1rem;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }

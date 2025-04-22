@@ -120,9 +120,7 @@ const AddMeal = () => {
 				{errors.price && <p className={styles.error}>{errors.price.message}</p>}
 
 				<input
-					{...register("image_URL", {
-						required: "Image URL is required",
-					})}
+					{...register("image_URL")}
 					placeholder="Link to meal image"
 					className={styles.input}
 				/>

@@ -20,10 +20,17 @@ body {
 }
 
 main {
-  padding: 20px 32px;
+  padding: 20px 24px;
   flex: 1;
 }
 
 a {
   text-decoration: none;
+}
+
+
+@media (max-width: 768px) {
+  main {
+    padding: 16px 24px;
+  }
 }

@@ -4,6 +4,7 @@ import { fetchAllMeals } from "@/utils/fetchFuncs";
 import { useEffect, useState } from "react";
 import Loader from "../Loader";
 import { StyledHomeMeal, StyledHomeMealList } from "./StyledHomeMeals";
+import Meal from "../Meal/Meal";
 
 const FeaturedMeals = () => {
 	const [meals, setMeals] = useState([]);
@@ -33,7 +34,7 @@ const FeaturedMeals = () => {
 	) : (
 		<StyledHomeMealList>
 			{meals.map((meal) => (
-				<StyledHomeMeal
+				<Meal
 					key={meal.id}
 					id={meal.id}
 					title={meal.title}

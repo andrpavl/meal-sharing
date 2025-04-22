@@ -9,6 +9,7 @@ import styles from "./meal.module.css";
 import { useRouter } from "next/navigation";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import Reviews from "@/components/Reviews/Reviews";
+import noImage from "@/assets/noImage.webp";
 
 const MealPage = () => {
 	const { id } = useParams();
@@ -16,6 +17,7 @@ const MealPage = () => {
 	const [reservations, setReservations] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const router = useRouter();
+
 
 	useEffect(() => {
 		const fetchMealData = async () => {
@@ -60,8 +62,12 @@ const MealPage = () => {
 					<h1>{meal.title}</h1>
 					<img
 						className={styles.mealImg}
-						src={meal.image_URL}
+						src={meal.image_URL || noImage.src}
 						alt={meal.title}
+						onError={(e) => {
+							e.currentTarget.onerror = null;
+							e.currentTarget.src = noImage.src;
+						}}
 					/>
 					<h3>
 						Description: <span>{meal.description}</span>

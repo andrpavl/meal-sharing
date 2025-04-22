@@ -4,14 +4,12 @@ export const StyledMeal = styled.li`
 	background-color: #f9f5f0;
 	border-radius: 12px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-
 	display: flex;
 	flex-direction: column;
-
 	height: 100%;
 	overflow: hidden;
-
 	transition: transform 0.2s ease;
+
 	&:hover {
 		transform: scale(1.02);
 	}
@@ -47,5 +45,46 @@ export const StyledMeal = styled.li`
 		font-weight: bold;
 		color: #000;
 		margin-top: 12px;
+		font-size: 1rem;
+	}
+
+	@media (max-width: 768px) {
+		img {
+			height: 180px;
+		}
+
+		.content {
+			padding: 10px;
+		}
+
+		h4 {
+			font-size: 1rem;
+		}
+
+		p {
+			font-size: 0.9rem;
+		}
+
+		.price {
+			font-size: 0.95rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		img {
+			height: 140px;
+		}
+
+		h4 {
+			font-size: 0.95rem;
+		}
+
+		p {
+			font-size: 0.85rem;
+		}
+
+		.price {
+			font-size: 0.85rem;
+		}
 	}
 `;
