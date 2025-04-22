@@ -12,8 +12,8 @@ function HomePage() {
 				<h1>Welcome to our Meal Sharing service</h1>
 			</section>
 			<h2 className="list-title">
-				Here you can see some our events. <br /> Psssssst... We have much more
-				of them!!!
+				Here you can see some our events. <br />
+				Psssssst... We have much more of them!!!
 			</h2>
 			<FeaturedMeals />
 			<div className="buttons-container">

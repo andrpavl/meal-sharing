@@ -40,9 +40,7 @@ const MealPage = () => {
 
 	if (isLoading) return <Loader />;
 	if (!meal.id) {
-		return (
-			<p style={{ textAlign: "center", fontSize: 36 }}>😵 Meal not found</p>
-		);
+		router.push("/not-found");
 	}
 
 	const totalReserved = reservations.reduce(
@@ -51,8 +49,9 @@ const MealPage = () => {
 	);
 	const availableSeats = meal.max_reservations - totalReserved;
 	const mealDate = new Date(meal.when).toLocaleDateString("da-DK");
+
 	return (
-		<div >
+		<div>
 			<div className={styles.mealPageCont}>
 				<button className={styles.backBtn} onClick={() => router.back()}>
 					<IoArrowBackCircleOutline /> Go back

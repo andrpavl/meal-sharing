@@ -23,7 +23,10 @@
 }
 
 .list-title {
+  font-size: 36px;
   text-align: center;
+  margin-top: 36px;
+  margin-bottom: 36px;
 }
 
 .buttons-container {
