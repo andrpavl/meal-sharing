@@ -48,7 +48,7 @@ export const StyledMeal = styled.li`
 		font-size: 1rem;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 767px) {
 		img {
 			height: 180px;
 		}

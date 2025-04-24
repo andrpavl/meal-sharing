@@ -58,3 +58,10 @@
     border: none;
     border-radius: 8px;
 }
+
+@media (max-width: 767px) {
+    .reviewForm {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}

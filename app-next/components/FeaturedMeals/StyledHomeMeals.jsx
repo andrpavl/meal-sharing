@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Meal from "../Meal/Meal";
 
 export const StyledHomeMealList = styled.ul`
 	display: grid;

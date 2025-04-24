@@ -1,105 +1,145 @@
 .mealPageCont {
-	position: relative;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 2rem;
-	justify-content: center;
-	align-items: flex-start;
-	max-width: 1200px;
-	margin: 0 auto;
-	animation: fadeIn 0.6s ease-in-out;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 0.6s ease-in-out;
 }
 
 .mealCont {
-	flex: 1 1 500px;
-	background: #f8f9fa;
-	padding: 2rem;
-	border-radius: 16px;
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-	transition: transform 0.3s ease;
+
+    flex: 1 1 500px;
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
 }
 
 .mealCont:hover {
-	transform: translateY(-4px);
+    transform: translateY(-4px);
 }
 
 .mealImg {
-	width: 100%;
-	max-height: 500px;
-	border-radius: 12px;
-	object-fit: cover;
-	margin-bottom: 1.5rem;
-	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-height: 500px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 .reservCont {
-	flex: 1 1 350px;
-	background: #fff3cd;
-	padding: 2rem;
-	border-radius: 16px;
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-	align-self: flex-start;
-	transition: transform 0.3s ease;
+    flex: 1 1 350px;
+    background: #fff3cd;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    align-self: flex-start;
+    transition: transform 0.3s ease;
 }
 
 .reservCont:hover {
-	transform: translateY(-4px);
+    transform: translateY(-4px);
 }
 
 .mealCont h3,
-.reservCont h3 {
-	margin: 1rem 0 0.5rem;
-	color: #2c2c2c;
+.reservTitle {
+    margin: 1rem 0 0.5rem;
+    color: #2c2c2c;
 }
 
 .mealCont span {
-	font-weight: normal;
-	color: #555;
+    font-weight: normal;
+    color: #555;
 }
 
 .backBtn {
-	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	padding: 10px 16px;
-	border-radius: 8px;
-	border: none;
-	background-color: #eee;
-	cursor: pointer;
-	font-size: 18px;
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	color: #333;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-	transition: background-color 0.2s ease, transform 0.2s ease;
+    position: absolute;
+    left: -9rem;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    z-index: 22;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .backBtn:hover {
-	background-color: #ccc;
-	color: white;
-	transform: scale(1.05);
+    background-color: #ccc;
+    color: white;
+    transform: scale(1.05);
 }
 
-@media (max-width: 768px) {
-	.mealPageCont {
-		flex-direction: column;
-		padding: 1rem;
-	}
 
-	.backBtn {
-		position: static;
-		margin-bottom: 1rem;
-	}
+.reviewBlock {
+
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .mealPageCont {
+        flex-direction: column;
+    }
+
+    .backBtn {
+        position: static;
+        padding: 10px;
+        font-size: 14px;
+        margin-top: 1rem;
+
+    }
+
+    .mealCont {
+        padding: 10px;
+    }
+
+    .mealImg {
+        margin: 0;
+        max-height: 18rem;
+    }
+
+    .reservCont {
+        padding: 1rem;
+        margin: 0;
+        width: 100%;
+    }
+
+    .reservTitle {
+        margin: 0;
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .backBtn {
+        position: static;
+    }
+    .mealPageCont {
+        flex-direction: column;
+    }
 }
 
 @keyframes fadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(20px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

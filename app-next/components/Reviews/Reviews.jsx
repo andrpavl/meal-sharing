@@ -27,7 +27,7 @@ const Reviews = ({ mealId }) => {
 		} catch (error) {
 			console.error("Failed to fetch reviews:", error);
 			setReviews([]);
-		} 
+		}
 	};
 
 	useEffect(() => {
@@ -69,7 +69,7 @@ const Reviews = ({ mealId }) => {
 	};
 
 	return (
-		<div>
+		<>
 			<h3>Reviews:</h3>
 			{reviews.length > 0 ? (
 				<ul className={styles.reviewsList}>
@@ -118,7 +118,7 @@ const Reviews = ({ mealId }) => {
 					Add review
 				</button>
 			</form>
-		</div>
+		</>
 	);
 };
 

@@ -5,7 +5,8 @@
 	flex-wrap: wrap;
 	background: linear-gradient(90deg, #c2c3c1 0%, #a9b08a 100%);
 	width: 100%;
-	padding: 1.5rem 2rem;
+	padding: 1.5rem auto;
+	padding-right: 1.5rem;
 	margin-top: auto;
 	box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
 	animation: fadeInUp 1s ease forwards;
@@ -14,12 +15,9 @@
 .logoImg {
 	width: 160px;
 	height: auto;
-	transition: transform 0.3s ease;
 }
 
-.logoImg:hover {
-	transform: scale(1.05);
-}
+
 
 .title {
 	font-family: "Dancing Script", cursive;
@@ -51,12 +49,14 @@
 	color: #1a1a1a;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+
+@media (max-width: 767px) {
 	.footer {
 		flex-direction: column;
 		text-align: center;
 		gap: 1rem;
+		padding-top: 10px;
+		padding-right: 0;
 	}
 
 	.logoImg {

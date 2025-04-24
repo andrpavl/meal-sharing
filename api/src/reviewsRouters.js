@@ -26,7 +26,7 @@ export const getReviewsByMealId = async (req, res) => {
 
 		reviews.length ?
 			res.json(reviews)
-		:	res.status(404).json({ error: "No reviews found for this meal." });
+		:	res.status(200).json(reviews);
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}

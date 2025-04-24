@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import styles from "./BookForm.module.css";
 import Swal from "sweetalert2";
 
-const BookForm = ({ mealId, maxGuests }) => {
+const BookForm = ({ mealId, maxGuests, onNewReservation }) => {
 	const {
 		register,
 		handleSubmit,
@@ -25,6 +25,15 @@ const BookForm = ({ mealId, maxGuests }) => {
 					contact_phonenumber: data.phone,
 					created_date: new Date().toISOString().split("T")[0],
 				}),
+			});
+
+			onNewReservation?.({
+				meal_id: Number(mealId),
+				number_of_guests: Number(data.guests),
+				contact_name: data.name,
+				contact_email: data.email,
+				contact_phonenumber: data.phone,
+				created_date: new Date().toISOString().split("T")[0],
 			});
 
 			if (!res.ok) throw new Error("Reservation failed");

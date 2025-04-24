@@ -18,7 +18,6 @@ const MealPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const router = useRouter();
 
-
 	useEffect(() => {
 		const fetchMealData = async () => {
 			try {
@@ -51,6 +50,9 @@ const MealPage = () => {
 	);
 	const availableSeats = meal.max_reservations - totalReserved;
 	const mealDate = new Date(meal.when).toLocaleDateString("da-DK");
+	const addReservation = (newReservation) => {
+		setReservations((prev) => [...prev, newReservation]);
+	};
 
 	return (
 		<div>
@@ -89,12 +91,18 @@ const MealPage = () => {
 
 				{availableSeats > 0 && (
 					<div className={styles.reservCont}>
-						<h3>Make a Reservation</h3>
-						<BookForm mealId={meal.id} maxGuests={availableSeats} />
+						<h3 className={styles.reservTitle}>Make a Reservation</h3>
+						<BookForm
+							mealId={meal.id}
+							maxGuests={availableSeats}
+							onNewReservation={addReservation}
+						/>
 					</div>
 				)}
 			</div>
-			{<Reviews mealId={Number(id)} />}
+			<div className={styles.reviewBlock}>
+				{<Reviews mealId={Number(id)} />}
+			</div>
 		</div>
 	);
 };
