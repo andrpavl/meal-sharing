@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import styles from "./Reviews.module.css";
-import { getReviewsByMealId } from "@/utils/fetchFuncs";
+import { deleteReview, getReviewsByMealId } from "@/utils/fetchFuncs";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { PiStarDuotone } from "react-icons/pi";
+import { LuTrash2 } from "react-icons/lu";
 
 const Reviews = ({ mealId }) => {
 	const [reviews, setReviews] = useState([]);
@@ -68,6 +70,25 @@ const Reviews = ({ mealId }) => {
 		}
 	};
 
+	const onDelete = async (id) => {
+		try {
+			await deleteReview(id);
+			await fetchReviews();
+			Swal.fire({
+				title: "Deleted!",
+				text: "Your review has been deleted.",
+				icon: "success",
+			});
+		} catch (error) {
+			console.error(error);
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Failed to delete review!",
+			});
+		}
+	};
+
 	return (
 		<>
 			<h3>Reviews:</h3>
@@ -75,14 +96,23 @@ const Reviews = ({ mealId }) => {
 				<ul className={styles.reviewsList}>
 					{reviews.map((review) => (
 						<li key={review.id} className={styles.listItem}>
+							<LuTrash2
+								className={styles.trashIcon}
+								onClick={() => onDelete(review.id)}
+							/>
 							<h4>{review.title}</h4>
 							<p>{review.description}</p>
-							<p>{review.stars}/5</p>
+							<div className={styles.starsDiv}>
+								<PiStarDuotone />
+								<p>{review.stars}/5</p>
+							</div>
 						</li>
 					))}
 				</ul>
 			) : (
-				<p>No reviews found for this meal. Be the first to add one!</p>
+				<p style={{ marginBottom: "12px" }}>
+					No reviews found for this meal. Be the first to add one!
+				</p>
 			)}
 
 			<form className={styles.reviewForm} onSubmit={handleSubmit(addReview)}>

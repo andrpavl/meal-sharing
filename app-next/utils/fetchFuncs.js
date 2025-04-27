@@ -28,9 +28,21 @@ export const getReservations = async () => {
 	}
 };
 
-export const getReviewsByMealId  = async (id) => {
+export const getReviewsByMealId = async (id) => {
 	try {
 		const responce = await fetch(`http://localhost:3001/api/reviews/${id}`);
+		const data = await responce.json();
+		return data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const deleteReview = async (id) => {
+	try {
+		const responce = await fetch(`http://localhost:3001/api/reviews/${id}`, {
+			method: "DELETE",
+		});
 		const data = await responce.json();
 		return data;
 	} catch (error) {

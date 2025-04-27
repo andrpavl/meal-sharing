@@ -19,6 +19,10 @@ body {
   overflow-x: hidden;
 }
 
+h4, p{
+  margin: 0;
+}
+
 main {
   padding: 20px 24px;
   flex: 1;
