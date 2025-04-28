@@ -3,7 +3,7 @@
 import { fetchAllMeals } from "@/utils/fetchFuncs";
 import { useEffect, useState } from "react";
 import Loader from "../Loader";
-import { StyledHomeMeal, StyledHomeMealList } from "./StyledHomeMeals";
+import { StyledHomeMealList } from "./StyledHomeMeals";
 import Meal from "../Meal/Meal";
 
 const FeaturedMeals = () => {
@@ -26,7 +26,9 @@ const FeaturedMeals = () => {
 
 		const interval = setInterval(getMeals, 5000);
 
-		return () => clearInterval(interval);
+		return () => {
+			clearInterval(interval);
+		};
 	}, []);
 
 	return isLoading ? (

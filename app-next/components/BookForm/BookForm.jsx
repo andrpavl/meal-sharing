@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import styles from "./BookForm.module.css";
 import Swal from "sweetalert2";
+import { PiSealWarning } from "react-icons/pi";
 
 const BookForm = ({ mealId, maxGuests, onNewReservation }) => {
 	const {
@@ -48,8 +49,6 @@ const BookForm = ({ mealId, maxGuests, onNewReservation }) => {
 			});
 		}
 	};
-
-
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -97,6 +96,12 @@ const BookForm = ({ mealId, maxGuests, onNewReservation }) => {
 			<button type="submit" className={styles.submitButton}>
 				Book seat
 			</button>
+			<div className={styles.notice}>
+				<PiSealWarning />
+				<p className={styles.noticeText}>
+					Notice! It's allowed to book max. 10 seats per 1 time.
+				</p>
+			</div>
 		</form>
 	);
 };

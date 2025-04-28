@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+import { createMeal } from "@/utils/fetchFuncs";
 
 const AddMeal = () => {
 	const {
@@ -18,29 +19,26 @@ const AddMeal = () => {
 	const router = useRouter();
 
 	const addNewMeal = async (data) => {
+		const mealData = {
+			title: data.title,
+			description: data.description,
+			location: data.location,
+			when: data.date,
+			max_reservations: data.guests,
+			price: Number(data.price),
+			image_URL: data.image_URL,
+			created_date: new Date().toISOString().split("T")[0],
+		};
+
 		try {
-			const response = await fetch("http://localhost:3001/api/meals/", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					title: data.title,
-					description: data.description,
-					location: data.location,
-					when: data.date,
-					max_reservations: data.guests,
-					price: Number(data.price),
-					image_URL: data.image_URL,
-					created_date: new Date().toISOString().split("T")[0],
-				}),
-			});
-
-			if (!response.ok) throw new Error("Adding of event failed");
-
-			Swal.fire({
-				title: "Well done!",
-				text: "You have just added a new event!",
-				icon: "success",
-			});
+			const response = await createMeal(mealData);
+			if (response) {
+				Swal.fire({
+					title: "Well done!",
+					text: "You have just added a new event!",
+					icon: "success",
+				});
+			}
 			reset();
 		} catch (error) {
 			Swal.fire({
