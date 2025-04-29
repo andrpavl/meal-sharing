@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchAllMeals } from "@/utils/fetchFuncs";
+import { fetchAllMeals, getFutureMeals } from "@/utils/fetchFuncs";
 import { useState, useEffect } from "react";
 import Meal from "../Meal/Meal";
 import Loader from "../Loader";
@@ -9,6 +9,7 @@ import {
 	SortGroup,
 	SortLabel,
 	SortSelect,
+	StyledCheckbox,
 	StyledMealList,
 } from "./StyledMealsList";
 
@@ -17,6 +18,7 @@ const MealsList = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [sortKey, setSortKey] = useState("");
 	const [sortDir, setSortDir] = useState("asc");
+	const [isSelected, setIsSelected] = useState(false);
 
 	useEffect(() => {
 		const getMeals = async () => {
@@ -25,7 +27,9 @@ const MealsList = () => {
 				const params = {};
 				if (sortKey) params.sortKey = sortKey;
 				if (sortDir) params.sortDir = sortDir;
-				const data = await fetchAllMeals(params);
+				const allMeals = await fetchAllMeals(params);
+				const futureMeals = await getFutureMeals();
+				const data = isSelected ? futureMeals : allMeals;
 				setMeals(data);
 			} catch (error) {
 				console.log(error);
@@ -34,7 +38,7 @@ const MealsList = () => {
 			}
 		};
 		getMeals();
-	}, [sortKey, sortDir]);
+	}, [sortKey, sortDir, isSelected]);
 
 	const handleSortKeyChange = (e) => {
 		setSortKey(e.target.value);
@@ -68,18 +72,30 @@ const MealsList = () => {
 								<option value="desc">Descending</option>
 							</SortSelect>
 						</SortGroup>
+						<StyledCheckbox>
+							<input
+								type="checkbox"
+								checked={isSelected}
+								onChange={() => setIsSelected(!isSelected)}
+							/>
+							&nbsp;Show only upcoming events
+						</StyledCheckbox>
 					</SortControls>
 					<StyledMealList>
-						{meals.map((meal) => (
-							<Meal
-								key={meal.id}
-								id={meal.id}
-								title={meal.title}
-								description={meal.description}
-								price={meal.price}
-								image_URL={meal.image_URL}
-							/>
-						))}
+						{meals && meals.length > 0 ? (
+							meals.map((meal) => (
+								<Meal
+									key={meal.id}
+									id={meal.id}
+									title={meal.title}
+									description={meal.description}
+									price={meal.price}
+									image_URL={meal.image_URL}
+								/>
+							))
+						) : (
+							<p>No meals found</p>
+						)}
 					</StyledMealList>
 				</>
 			)}

@@ -50,6 +50,12 @@ const AddMeal = () => {
 		}
 	};
 
+	const minDate = new Date(
+		new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
+	)
+		.toISOString()
+		.slice(0, 16);
+
 	return (
 		<div className={styles.container}>
 			<button className={styles.backBtn} onClick={() => router.back()}>
@@ -86,6 +92,7 @@ const AddMeal = () => {
 
 				<input
 					type="datetime-local"
+					min={minDate}
 					{...register("date", { required: "Date is required" })}
 					placeholder="Date of event"
 					className={styles.input}

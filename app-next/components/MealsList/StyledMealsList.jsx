@@ -33,7 +33,6 @@ export const SortControls = styled.div`
 export const SortGroup = styled.div`
 	display: flex;
 	flex-direction: column;
-	
 `;
 
 export const SortLabel = styled.label`
@@ -56,5 +55,15 @@ export const SortSelect = styled.select`
 	&:focus {
 		border-color: #0070f3;
 		box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+	}
+`;
+
+export const StyledCheckbox = styled.label`
+	font-size: 1rem;
+	color: #333;
+	margin-top: 1.5rem;
+
+	@media (max-width: 639px) {
+		margin-top: 0;
 	}
 `;

@@ -60,3 +60,12 @@ export const createMeal = async (mealData) => {
 		throw error;
 	}
 };
+
+export const getFutureMeals = async () => {
+	try {
+		const response = await axios.get(`${URL}/meals/future-meals`);
+		return response.data;
+	} catch (error) {
+		console.error("Failed to fetch meals:", error);
+	}
+};
