@@ -125,6 +125,7 @@ export const addNewMeal = async (req, res) => {
 			when,
 			max_reservations,
 			price,
+			image_URL,
 			created_date,
 		} = req.body;
 
@@ -147,6 +148,7 @@ export const addNewMeal = async (req, res) => {
 			when,
 			max_reservations,
 			price,
+			image_URL,
 			created_date,
 		});
 

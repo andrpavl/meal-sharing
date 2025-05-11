@@ -11,7 +11,7 @@ import {
 const reviewRouter = express.Router();
 
 reviewRouter.get("/", getReviews);
-reviewRouter.get("/:meal_id/reviews", getReviewsByMealId)
+reviewRouter.get("/:meal_id", getReviewsByMealId)
 reviewRouter.post("/", addReview);
 reviewRouter.get("/:id", getReviewById);
 reviewRouter.put("/:id", updateReview);
