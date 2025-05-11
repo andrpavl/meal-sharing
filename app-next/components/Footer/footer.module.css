@@ -15,6 +15,7 @@
 .logoImg {
 	width: 160px;
 	height: auto;
+	mix-blend-mode: darken;
 }
 
 

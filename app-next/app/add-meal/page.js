@@ -104,6 +104,7 @@ const AddMeal = () => {
 					{...register("guests", {
 						required: "Guests field is required",
 						min: { value: 1, message: "At least 1 guest is required" },
+						max: { value: 50, message: "We can host maximum 50 guests." },
 					})}
 					placeholder="How many guests?"
 					className={styles.input}

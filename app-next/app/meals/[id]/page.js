@@ -28,6 +28,7 @@ const MealPage = () => {
 				);
 
 				setMeal(mealData);
+				console.log(mealData);
 				if (!mealData) {
 					router.push("/not-found");
 					return null;
@@ -37,8 +38,8 @@ const MealPage = () => {
 				console.error(err);
 			} finally {
 				setIsLoading(false);
-				console.log(meal);
-			}
+				
+			} 
 		};
 
 		fetchMealData();
