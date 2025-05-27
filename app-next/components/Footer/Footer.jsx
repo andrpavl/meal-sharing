@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import logoImage from "../Header/image.png";
+import logoImage from "@/assets/image.png";
 import styles from "./footer.module.css";
 import { FaFacebook, FaInstagram, FaTiktok, FaLinkedin } from "react-icons/fa";
 import Link from "next/link";
@@ -33,9 +33,10 @@ const Footer = () => {
 
 	return (
 		<footer className={styles.footer}>
-			<Image src={logoImage} alt="logo" width={160}  />
-			<h2 className={styles.title}>Meal Sharing</h2>
-
+			<Image src={logoImage} alt="logo" className={styles.logoImg} />
+			<Link href="/" className={styles.title}>
+				Meal Sharing
+			</Link>
 			<ul className={styles.socialMediaList}>
 				{socialMediaItems.map((item) => (
 					<li key={item.mediaTitle} className={styles.socialMediaItem}>

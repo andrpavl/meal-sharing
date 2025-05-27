@@ -6,7 +6,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
 export const metadata = {
-	title: "HackYourFuture",
+	title: "Meal Sharing",
 };
 
 export default function RootLayout({ children }) {
