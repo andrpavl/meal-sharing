@@ -1,6 +1,6 @@
 import knex from "./database_client.js";
 
-export const getReservations = async (req, res) => {
+export const getReservations = async (_, res) => {
 	try {
 		const allReservations = await knex.raw(
 			"SELECT * FROM reservation ORDER BY id"
@@ -37,16 +37,14 @@ export const addNewReservation = async (req, res) => {
 			return res.status(400).json({ error: "All fields are required." });
 		}
 
-		const result = await knex("reservation")
-			.insert({
-				number_of_guests,
-				meal_id,
-				created_date,
-				contact_phonenumber,
-				contact_name,
-				contact_email,
-			})
-			.returning("*");
+		const result = await knex("reservation").insert({
+			number_of_guests,
+			meal_id,
+			created_date,
+			contact_phonenumber,
+			contact_name,
+			contact_email,
+		});
 
 		res.status(201).json({ message: "Reservation added successfully!" });
 	} catch (error) {

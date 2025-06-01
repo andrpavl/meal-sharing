@@ -1,6 +1,6 @@
 import knex from "./database_client.js";
 
-export const getReviews = async (req, res) => {
+export const getReviews = async (_, res) => {
 	try {
 		let query = knex("review").select("*");
 
@@ -23,10 +23,10 @@ export const getReviewsByMealId = async (req, res) => {
 		const reviews = await knex("review")
 			.select("review.*")
 			.where("review.meal_id", mealId);
-            
+
 		reviews.length ?
 			res.json(reviews)
-		:	res.status(404).json({ error: "No reviews found for this meal." });
+		:	res.status(200).json(reviews);
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error." });
 	}

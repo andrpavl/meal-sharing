@@ -1,0 +1,88 @@
+.textarea {
+    width: 100%;
+    resize: none;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+}
+
+.reviewForm {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    width: 30%;
+    align-items: center;
+    border: 2px solid lightgray;
+    padding: 8px;
+    border-radius: 8px;
+
+}
+
+.addBtn {
+    width: 100%;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.reviewTitle {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    margin: 0;
+}
+
+.reviewsList {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.listItem {
+    position: relative;
+    background-color: rgba(198, 190, 190, 0.8);
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+.stars {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+}
+
+.starsDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.trashIcon {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+}
+
+.listItem h4 {
+    margin-bottom: 14px;
+
+}
+
+@media (max-width: 767px) {
+    .reviewForm {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}

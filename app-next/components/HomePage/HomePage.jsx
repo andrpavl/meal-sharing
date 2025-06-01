@@ -1,19 +1,31 @@
-import HYFLogo from "@/assets/hyf.svg";
-import Image from "next/image";
-import "./HomePage.css";
+"use client";
 
-// Feel free to replace the content of this component with your own
+import "./HomePage.css";
+import FeaturedMeals from "../FeaturedMeals/FeaturedMeals";
+import { useRouter } from "next/navigation";
+
 function HomePage() {
-  return (
-    <>
-      <a href="https://www.hackyourfuture.dk/" target="_blank" className="link">
-        <Image src={HYFLogo.src} width={HYFLogo.width} height={HYFLogo.height} className="logo" />
-      </a>
-      <a href="/nested" className="link">
-        <span className="message">Go to the nested page</span>
-      </a>
-    </>
-  );
+	const router = useRouter();
+	return (
+		<>
+			<section className="hero">
+				<h1>Welcome to our Meal Sharing service</h1>
+			</section>
+			<h2 className="list-title">
+				Here you can see some our events. <br />
+				Psssssst... We have much more of them!!!
+			</h2>
+			<FeaturedMeals />
+			<div className="buttons-container">
+				<button onClick={() => router.push("/meals")}>
+					Browse MORE Meal Sharing events here
+				</button>
+				<button onClick={() => router.push("/add-meal")}>
+					Add a new event
+				</button>
+			</div>
+		</>
+	);
 }
 
 export default HomePage;
