@@ -2,7 +2,7 @@
 FROM node:18-alpine
 
 # Папка в контейнері
-WORKDIR /usr/src/app
+WORKDIR /usr/src/api
 
 # Копіюємо package.json і package-lock.json (якщо є)
 COPY package*.json ./
