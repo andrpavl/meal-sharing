@@ -1,0 +1,20 @@
+# Базовий образ Node.js
+FROM node:18-alpine
+
+# Папка в контейнері
+WORKDIR /usr/src/app
+
+# Копіюємо package.json і package-lock.json (якщо є)
+COPY package*.json ./
+
+# Встановлюємо залежності
+RUN npm install
+
+# Копіюємо всі файли бекенда
+COPY . .
+
+# Виставляємо порт
+EXPOSE 3001
+
+# Запускаємо сервер
+CMD ["npm", "run", "start"]
