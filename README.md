@@ -6,7 +6,7 @@ Check the website in this [link](https://meal-sharing-seven.vercel.app/)
 
 ## About this project
 
-This i a full-stack web application built with React, NextJS, NodeJS, MySQL. 
+This is a full-stack web application built with React, NextJS, NodeJS, MySQL. 
 
 This project was created during my studying at [HackYourFuture](https://www.hackyourfuture.dk) Aarhus.
 
