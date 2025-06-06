@@ -24,7 +24,7 @@ const BookForm = ({ mealId, maxGuests, onNewReservation }) => {
 		};
 
 		try {
-			const res = await fetch("http://localhost:3001/api/reservations/", {
+			const res = await fetch("https://meal-sharing-production.up.railway.app/api/reservations/", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(reservationData),

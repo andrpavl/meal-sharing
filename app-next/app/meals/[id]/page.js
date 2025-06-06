@@ -31,7 +31,7 @@ const MealPage = () => {
 				setMeal(mealData);
 
 				const allReservations = await getReservations();
-				console.log("allReservations:", allReservations);
+
 				const filtered = allReservations.filter(
 					(r) => r.meal_id === Number(id)
 				);
