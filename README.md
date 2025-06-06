@@ -1,4 +1,4 @@
-<img src="./images/header.png" alt="image" width="200px" height="200px">
+<img src="./images/header.png" alt="image" height="200px">
 
 # Meal Sharing App
 Check the website in this [[link](https://meal-sharing-seven.vercel.app/)]
