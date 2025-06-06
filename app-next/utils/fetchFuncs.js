@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:3001/api";
+const URL = "https://meal-sharing-production.up.railway.app/api";
 
 export const fetchAllMeals = async (params = {}) => {
 	try {
