@@ -38,7 +38,7 @@ const Reviews = ({ mealId }) => {
 
 	const addReview = async (data) => {
 		try {
-			const res = await fetch("http://localhost:3001/api/reviews/", {
+			const res = await fetch("https://meal-sharing-production.up.railway.app/api/reviews/", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({

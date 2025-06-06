@@ -22,24 +22,26 @@ const MealPage = () => {
 		const fetchMealData = async () => {
 			try {
 				const mealData = await getMealById(id);
+
+				if (!mealData) {
+					router.push("/not-found");
+					return;
+				}
+
+				setMeal(mealData);
+
 				const allReservations = await getReservations();
+				console.log("allReservations:", allReservations);
 				const filtered = allReservations.filter(
 					(r) => r.meal_id === Number(id)
 				);
 
-				setMeal(mealData);
-				console.log(mealData);
-				if (!mealData) {
-					router.push("/not-found");
-					return null;
-				}
 				setReservations(filtered);
 			} catch (err) {
 				console.error(err);
 			} finally {
 				setIsLoading(false);
-				
-			} 
+			}
 		};
 
 		fetchMealData();

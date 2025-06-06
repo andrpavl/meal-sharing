@@ -23,6 +23,7 @@ export const getMealById = async (id) => {
 export const getReservations = async () => {
 	try {
 		const response = await axios.get(`${URL}/reservations`);
+		console.log(response);
 		return response.data;
 	} catch (error) {
 		console.error("Failed to fetch reservations:", error);
