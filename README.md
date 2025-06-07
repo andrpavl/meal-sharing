@@ -1,16 +1,16 @@
-<img src="./images/header.png" alt="image" width="200px" height="200px">
+<img src="./images/header.png" alt="image">
 
 # Meal Sharing App
-Check the website in this [[link](https://meal-sharing-seven.vercel.app/)]
+Check the website in this [link](https://meal-sharing-seven.vercel.app/)
 
 
 ## About this project
 
-This i a full-stack web application built with React, NextJS, NodeJS, MySQL. 
+This is a full-stack web application built with React, NextJS, NodeJS, MySQL. 
 
-This project was created during my studying at [[HackYourFuture](https://www.hackyourfuture.dk)] Aarhus.
+This project was created during my studying at [HackYourFuture](https://www.hackyourfuture.dk) Aarhus.
 
-The database and backend were deployed on [[Railway](https://railway.com/)] and frontend on [[Vercel](https://vercel.com)]
+The database and backend were deployed on [Railway](https://railway.com/) and frontend on [Vercel](https://vercel.com)
 
 This website offers such options as:
 
