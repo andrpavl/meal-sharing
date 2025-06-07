@@ -3,9 +3,7 @@
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
-	background: linear-gradient(90deg, #c2c3c1 0%, #a9b08a 100%);
-	width: 100%;
-	padding: 1.5rem auto;
+background: linear-gradient(50deg, #d7e7b6 0%, #819f00 100%);	width: 100%;
 	padding-right: 1.5rem;
 	margin-top: auto;
 	box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);

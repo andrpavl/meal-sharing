@@ -2,9 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background: linear-gradient(90deg, #c2c3c1 0%, #a9b08a 100%);
-	box-shadow: 0px 4px 12px rgba(243, 241, 241, 0.523);
-	color: white;
+background: linear-gradient(50deg, #d7e7b6 0%, #819f00 100%);	box-shadow: 0px 4px 12px rgba(243, 241, 241, 0.523);
 	font-family: "Inter", sans-serif;
 	z-index: 10;
 	margin-bottom: 20px;
@@ -17,9 +15,9 @@
 	gap: 30px;
 	font-size: 18px;
 	font-weight: 500;
+	font-family: "Inter", sans-serif;
+	color: #1F1F1F;
 }
-
-
 
 .navItem {
 	color: rgb(41, 40, 40);
@@ -78,7 +76,7 @@
 .logoImg {
 	width: 160px;
 	height: 100%;
-	mix-blend-mode: darken;
+	mix-blend-mode: multiply;
 }
 
 @media (min-width: 768px) and (max-width: 1200px) {

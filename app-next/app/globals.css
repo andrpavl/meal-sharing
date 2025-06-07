@@ -17,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  color: #2C3E50;
 }
 
 h4,
