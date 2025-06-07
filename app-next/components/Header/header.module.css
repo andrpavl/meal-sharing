@@ -2,7 +2,8 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-background: linear-gradient(50deg, #d7e7b6 0%, #819f00 100%);	box-shadow: 0px 4px 12px rgba(243, 241, 241, 0.523);
+	background: linear-gradient(50deg, #d7e7b6 0%, #819f00 100%);
+	box-shadow: 0px 4px 12px rgba(243, 241, 241, 0.523);
 	font-family: "Inter", sans-serif;
 	z-index: 10;
 	margin-bottom: 20px;
